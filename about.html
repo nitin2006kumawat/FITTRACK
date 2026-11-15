@@ -1,0 +1,152 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#10120f">
+  <meta name="description" content="Learn about FITTRACK, a fitness tracking web application for workouts, nutrition, hydration and progress.">
+  <title>About Us - FITTRACK</title>
+  <link rel="stylesheet" href="css/base.css">
+  <link rel="stylesheet" href="css/components.css">
+  <style>
+    .info-page {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 48px 24px 80px;
+    }
+    .info-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+      margin-bottom: 64px;
+    }
+    .info-brand {
+      color: var(--color-accent);
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+    .info-link {
+      color: var(--color-text-muted);
+    }
+    .info-link:hover {
+      color: var(--color-accent);
+    }
+    .info-eyebrow {
+      color: var(--color-accent);
+      font-weight: 700;
+      letter-spacing: 2px;
+      font-size: 12px;
+    }
+    .info-page h1 {
+      font-size: clamp(36px, 7vw, 56px);
+      letter-spacing: -2px;
+      margin: 12px 0 20px;
+    }
+    .info-page h2 {
+      font-size: 23px;
+      margin: 36px 0 12px;
+    }
+    .info-page p, .info-page li {
+      color: var(--color-text-muted);
+      font-size: 15px;
+      line-height: 1.9;
+    }
+    .info-card {
+      padding: 28px;
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      border-radius: var(--radius-lg);
+      margin-top: 28px;
+    }
+    .info-footer {
+      margin-top: 70px;
+      padding-top: 24px;
+      border-top: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      font-size: 13px;
+    }
+    @media (max-width: 480px) {
+      .info-page { padding: 28px 18px 60px; }
+      .info-header { margin-bottom: 42px; }
+      .info-card { padding: 20px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="info-page">
+    <header class="info-header">
+      <a class="info-brand" href="index.html">FITTRACK</a>
+      <a class="info-link" href="index.html">Back to Dashboard</a>
+    </header>
+
+    <p class="info-eyebrow">ABOUT FITTRACK</p>
+    <h1>Fitness progress, made simple.</h1>
+    <p>
+      FITTRACK is a web-based fitness tracking application
+      designed to help people organize their workouts,
+      record their daily activities and understand their
+      fitness progress over time.
+    </p>
+
+    <section class="info-card">
+      <h2>What is FITTRACK?</h2>
+      <p>
+        FITTRACK brings several fitness tracking tools
+        together in one convenient dashboard. Whether you
+        are starting a workout routine or maintaining an
+        established training plan, FITTRACK helps you keep
+        your records organized.
+      </p>
+    </section>
+
+    <section class="info-card">
+      <h2>What can you track?</h2>
+      <ul>
+        <li>Workout sessions, exercises, sets and repetitions</li>
+        <li>Training weights and workout history</li>
+        <li>Daily water intake</li>
+        <li>Body weight changes</li>
+        <li>Food entries, calories and macronutrients</li>
+        <li>Personal fitness goals and progress trends</li>
+      </ul>
+    </section>
+
+    <section class="info-card">
+      <h2>Our purpose</h2>
+      <p>
+        Our goal is to make fitness tracking accessible
+        and straightforward. FITTRACK focuses on useful
+        tools, clear progress information and an interface
+        that works across modern devices.
+      </p>
+    </section>
+
+    <section class="info-card">
+      <h2>Use FITTRACK your way</h2>
+      <p>
+        You can explore FITTRACK in guest mode or create
+        an account to access cloud synchronization.
+        Account holders can use their saved fitness data
+        across supported devices.
+      </p>
+    </section>
+
+    <section class="info-card">
+      <h2>Important information</h2>
+      <p>
+        FITTRACK is a fitness logging tool, not a medical
+        service. Information displayed in the application
+        is intended for general fitness tracking and does
+        not replace professional medical or nutritional advice.
+      </p>
+    </section>
+
+    <footer class="info-footer">
+      FITTRACK - Your journey, your pace.
+    </footer>
+  </main>
+</body>
+</html>
