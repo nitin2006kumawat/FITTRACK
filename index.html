@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10120f">
+    <meta name="description" content="FITTRACK is your personal space for training, nutrition, and progress.">
+    <title>Dashboard · FITTRACK</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <script type="module" src="js/app.js"></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <button class="sidebar-backdrop" type="button" aria-label="Close navigation" tabindex="-1"></button>
+
+      <aside class="sidebar" id="primary-navigation" aria-label="Main navigation">
+        <a class="brand" href="#dashboard" aria-label="FITTRACK dashboard">
+          <span class="brand-mark" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M5 18h5l3-9 5 15 3-8h6" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <span class="brand-name">FIT<span>TRACK</span></span>
+        </a>
+
+        <div class="sidebar-label">WORKSPACE</div>
+        <nav class="nav-list" aria-label="Workspace">
+          <a class="nav-link is-active" href="#dashboard" aria-current="page">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="3.5" width="7" height="7" rx="1.5"/><rect x="3.5" y="13.5" width="7" height="7" rx="1.5"/><rect x="13.5" y="13.5" width="7" height="7" rx="1.5"/></svg>
+            <span>Dashboard</span>
+          </a>
+          <a class="nav-link" href="#workouts">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8v8M4 10v4m13.5-6v8M20 10v4M6.5 12h11"/></svg>
+            <span>Workouts</span>
+          </a>
+          <a class="nav-link" href="#plans">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4.5h8M9 3h6v3H9z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="m8.5 12 2 2 5-5"/></svg>
+            <span>Training plans</span>
+          </a>
+          <a class="nav-link" href="#exercises">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 20 8v8l-8 4.5L4 16V8l8-4.5Z"/><path d="m4.5 8.5 7.5 4 7.5-4M12 13v7"/></svg>
+            <span>Exercise library</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-label sidebar-label-spaced">YOUR HEALTH</div>
+        <nav class="nav-list" aria-label="Health tracking">
+          <a class="nav-link" href="#progress">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19.5V13m5 6.5V8m5 11.5v-5m5 5V4.5"/></svg>
+            <span>Progress</span>
+          </a>
+          <a class="nav-link" href="#nutrition">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 3.5v7m-3-7v4a3 3 0 0 0 6 0v-4m-3 7v10M17 3.5c-2 2-3 4-3 7h6v-7c0-1.7-1.3-2.5-3-2.5v17"/></svg>
+            <span>Nutrition</span>
+          </a>
+          <a class="nav-link" href="#water">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z"/><path d="M9 15.5a3 3 0 0 0 3 3"/></svg>
+            <span>Water</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-spacer"></div>
+        <div class="sidebar-note">
+          <span class="sidebar-note-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg>
+          </span>
+          <p>Small steps.<br><strong>Stronger every day.</strong></p>
+        </div>
+        <a class="profile-link" href="#profile">
+          <span class="avatar" id="profile-avatar" aria-hidden="true">G</span>
+          <span class="profile-copy"><strong id="profile-name">Guest athlete</strong><small id="profile-mode">Guest mode</small></span>
+          <svg class="profile-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 18 6-6-6-6"/></svg>
+        </a>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <button class="menu-toggle icon-button" type="button" aria-label="Open navigation" aria-controls="primary-navigation" aria-expanded="false">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+          </button>
+          <div class="breadcrumbs"><span>Workspace</span><span class="breadcrumb-divider">/</span><strong id="current-page-label">Dashboard</strong></div>
+          <div class="topbar-actions">
+            <span class="preview-badge"><span aria-hidden="true"></span><b id="mode-label">GUEST MODE</b></span>
+            <span class="date-label" id="today-label"></span>
+          </div>
+        </header>
+
+        <div class="page-content">
+          <section class="view-panel" id="dashboard" data-view="dashboard" aria-labelledby="dashboard-title">
+            <div class="page-heading">
+              <div>
+                <p class="eyebrow" id="greeting-label">YOUR FITNESS, IN FOCUS</p>
+                <h1 id="dashboard-title">Good morning<span class="heading-period">.</span></h1>
+                <p class="page-description">A little progress each day adds up to big results.</p>
+              </div>
+              <a class="button button-primary" href="#workouts">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 8v8M4 10v4m13.5-6v8M20 10v4m-13.5-2h11"/></svg>
+                Log a workout
+                <svg class="button-arrow" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg>
+              </a>
+            </div>
+
+            <div class="preview-notice" id="guest-preview-notice" role="note">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5m0-8h.01"/></svg>
+              <span>Guest mode is on. Your activity is saved privately in this browser on this device.</span>
+            </div>
+
+            <div class="section-heading">
+              <div><h2>Today at a glance</h2><p>Your daily snapshot</p></div>
+              <span class="date-pill" id="date-pill"></span>
+            </div>
+
+            <div class="stats-grid">
+              <article class="stat-card">
+                <div class="stat-topline"><span class="stat-label">Activity</span><span class="stat-icon icon-lime"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 16h4l3-9 4 12 3-7h2"/></svg></span></div>
+                <div class="stat-value"><span id="activity-minutes" class="stat-number">0</span> <span>min</span></div>
+                <div class="stat-foot"><span class="status-dot"></span><span id="activity-goal-label">0 / 30 min goal</span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-topline"><span class="stat-label">Calories burned</span><span class="stat-icon icon-orange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M13.5 3.5c.5 4-4.5 5.5-4.5 10a3 3 0 0 0 6 0c0-1.5-.5-2.5-1.5-4 4 2 6 5 6 8a7.5 7.5 0 0 1-15 0c0-5.5 4-9 9-14Z"/></svg></span></div>
+                <div class="stat-value"><span id="calories-burned" class="stat-number">0</span> <span>kcal</span></div>
+                <div class="stat-foot"><span class="status-dot dot-orange"></span><span>From logged workouts</span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-topline"><span class="stat-label">Water intake</span><span class="stat-icon icon-blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z"/></svg></span></div>
+                <div class="stat-value"><span id="water-consumed" class="stat-number">0</span> <span>/ <span id="water-goal">2.5</span> L</span></div>
+                <div class="stat-progress" role="progressbar" aria-label="Daily water goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="water-progress-bar"></span></div>
+                <div class="stat-foot"><span id="water-progress-label">0% of daily goal</span><a class="inline-action" href="#water">Log water</a></div>
+              </article>
+              <article class="stat-card completion-card">
+                <div class="stat-topline"><span class="stat-label">Daily movement</span><span class="stat-icon icon-purple"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="m8.5 12 2.3 2.3 4.8-5"/></svg></span></div>
+                <div class="completion-content">
+                  <div class="stat-value"><span id="movement-progress" class="stat-number">0</span><span>%</span></div>
+                  <div class="completion-ring" id="movement-ring" role="img" aria-label="Daily movement goal: 0 percent complete"><span>GOAL</span></div>
+                </div>
+                <div class="stat-foot"><span id="movement-goal-label">0 / 30 min</span><button class="inline-action" type="button" data-open-goals>Set goals</button></div>
+              </article>
+            </div>
+
+            <div class="dashboard-grid">
+              <section class="panel activity-panel" aria-labelledby="activity-title">
+                <div class="panel-heading">
+                  <div><h2 id="activity-title">Weekly activity</h2><p>Your logged movement over the last 7 days</p></div>
+                  <span class="panel-period">LAST 7 DAYS</span>
+                </div>
+                <div class="activity-summary"><strong><span id="weekly-hours">0</span> <span>hrs</span></strong><span class="summary-caption">logged active time</span></div>
+                <div class="chart" id="weekly-chart" role="img" aria-label="Logged activity over the last 7 days"></div>
+                <div class="chart-legend"><span></span> Active minutes <span class="legend-note">Your logs</span></div>
+              </section>
+
+              <section class="panel focus-panel" aria-labelledby="focus-title">
+                <div class="panel-heading">
+                  <div><h2 id="focus-title">Your focus</h2><p>Build a balanced routine</p></div>
+                  <span class="focus-sparkle" aria-hidden="true">
+                    <svg viewBox="0 0 24 24"><path d="m12 3 1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"/><path d="m19 15 .9 2.1L22 18l-2.1.9L19 21l-.9-2.1L16 18l2.1-.9L19 15Z"/></svg>
+                  </span>
+                </div>
+                <div class="focus-list">
+                  <div class="focus-item">
+                    <span class="focus-marker marker-lime"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16m-8-8h16"/></svg></span>
+                    <div class="focus-copy"><strong>Move with intention</strong><span>Make time for movement that feels good.</span></div>
+                  </div>
+                  <div class="focus-item">
+                    <span class="focus-marker marker-blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z"/></svg></span>
+                    <div class="focus-copy"><strong>Stay hydrated</strong><span>Keep water close throughout your day.</span></div>
+                  </div>
+                  <div class="focus-item">
+                    <span class="focus-marker marker-orange"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5 14 9l5.5 2-5.5 2-2 5.5-2-5.5-5.5-2L10 9l2-5.5Z"/></svg></span>
+                    <div class="focus-copy"><strong>Celebrate consistency</strong><span>Showing up is progress all on its own.</span></div>
+                  </div>
+                </div>
+                <a class="text-link" href="#plans">Explore training plans <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></a>
+              </section>
+            </div>
+
+            <footer class="page-footer"><span>FITTRACK <span class="footer-dot">·</span> YOUR JOURNEY, YOUR PACE</span><span>Made for progress, not perfection.</span></footer>
+          </section>
+
+          <section class="view-panel feature-view" id="workouts" data-view="workouts" aria-labelledby="workouts-title" hidden>
+            <div class="feature-heading"><div><p class="eyebrow">YOUR TRAINING</p><h1 id="workouts-title">Workouts<span class="heading-period">.</span></h1><p class="page-description">Build a session, track each set, and save your training history.</p></div></div>
+            <div class="feature-grid" id="workout-setup-grid">
+              <section class="panel form-panel" aria-labelledby="workout-form-title">
+                <div class="panel-heading"><div><h2 id="workout-form-title">Start a workout</h2><p>Your session is saved as you go</p></div></div>
+                <form id="workout-form" class="entry-form">
+                  <label class="field-label" for="workout-name">Workout name</label>
+                  <input id="workout-name" name="name" type="text" maxlength="60" placeholder="e.g. Upper body day" required autocomplete="off">
+                  <div class="form-row">
+                    <div><label class="field-label" for="workout-type">Activity</label><select id="workout-type" name="type"><option value="Strength">Strength</option><option value="Cardio">Cardio</option><option value="Yoga">Yoga</option><option value="Mobility">Mobility</option><option value="Other">Other</option></select></div>
+                    <div><label class="field-label" for="workout-plan">Start from plan <span>(optional)</span></label><select id="workout-plan" name="plan"><option value="">Blank workout</option></select></div>
+                  </div>
+                  <label class="field-label" for="workout-calories">Calories burned <span>(optional estimate)</span></label>
+                  <input id="workout-calories" name="calories" type="number" min="0" max="5000" step="1" placeholder="Add if known" inputmode="numeric">
+                  <button class="button button-primary form-submit" type="submit">Start workout <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 5 11 7-11 7V5Z"/></svg></button>
+                </form>
+              </section>
+              <section class="panel history-panel" id="workout-history-panel" aria-labelledby="workout-history-title">
+                <div class="panel-heading"><div><h2 id="workout-history-title">Workout history</h2><p>Your completed sessions</p></div><span class="history-count" id="workout-count">0 sessions</span></div>
+                <div class="entry-list" id="workout-list" aria-live="polite"></div>
+              </section>
+            </div>
+            <section class="panel active-workout-panel" id="active-workout-panel" aria-labelledby="active-workout-title" hidden>
+              <div class="active-workout-heading">
+                <div><p class="eyebrow">WORKOUT IN PROGRESS</p><h2 id="active-workout-title">Workout</h2><p id="active-workout-meta" class="page-description"></p></div>
+                <div class="active-workout-actions"><span class="elapsed-time" id="elapsed-time" aria-live="off">00:00</span><button class="button button-primary" type="button" data-finish-workout>Finish workout</button><button class="button button-secondary" type="button" data-cancel-workout>Cancel</button></div>
+              </div>
+              <div class="active-workout-grid">
+                <div class="active-exercises">
+                  <div class="panel-heading"><div><h3>Exercises</h3><p>Mark each set complete as you go</p></div><span class="history-count" id="active-exercise-count">0 exercises</span></div>
+                  <div class="exercise-list" id="session-exercise-list" aria-live="polite"></div>
+                  <form class="add-exercise-form" id="add-exercise-form">
+                    <label class="visually-hidden" for="session-exercise-name">Exercise name</label>
+                    <input id="session-exercise-name" name="exercise" type="text" maxlength="80" placeholder="Add an exercise, e.g. Bench press" required autocomplete="off">
+                    <button class="button button-secondary" type="submit">Add exercise</button>
+                  </form>
+                </div>
+                <section class="rest-timer" aria-labelledby="rest-timer-title">
+                  <span class="stat-icon icon-lime"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 1.5M9 3h6m-3 0v2"/></svg></span>
+                  <p class="eyebrow">TAKE YOUR TIME</p><h3 id="rest-timer-title">Rest timer</h3>
+                  <div class="timer-display" id="timer-display" aria-live="off">01:30</div>
+                  <label class="visually-hidden" for="rest-duration">Rest timer duration</label>
+                  <select id="rest-duration"><option value="30">30 seconds</option><option value="60">60 seconds</option><option value="90" selected>90 seconds</option><option value="120">2 minutes</option><option value="180">3 minutes</option></select>
+                  <p class="timer-status" id="rest-timer-status" aria-live="polite">Ready when you are.</p>
+                  <div class="timer-actions"><button class="button button-primary" type="button" data-timer-toggle>Start</button><button class="button button-secondary" type="button" data-timer-reset>Reset</button></div>
+                </section>
+              </div>
+            </section>
+          </section>
+          <section class="view-panel feature-view" id="plans" data-view="plans" aria-labelledby="plans-title" hidden>
+            <div class="feature-heading"><div><p class="eyebrow">PLAN YOUR ROUTINE</p><h1 id="plans-title">Training plans<span class="heading-period">.</span></h1><p class="page-description">Build a repeatable routine and choose the days you want to train.</p></div></div>
+            <div class="feature-grid plan-grid">
+              <section class="panel form-panel" aria-labelledby="plan-form-title">
+                <div class="panel-heading"><div><h2 id="plan-form-title">Create a plan</h2><p>Set a weekly schedule and exercise targets</p></div></div>
+                <form id="plan-form" class="entry-form">
+                  <label class="field-label" for="plan-name">Plan name</label>
+                  <input id="plan-name" name="name" type="text" maxlength="60" placeholder="e.g. Full body strength" required autocomplete="off">
+                  <label class="field-label" for="plan-location">Where will you train?</label>
+                  <select id="plan-location" name="location"><option value="Gym">Gym</option><option value="Home">Home</option><option value="Flexible">Flexible</option></select>
+                  <fieldset class="schedule-fieldset"><legend class="field-label">Weekly schedule <span>(choose at least one)</span></legend>
+                    <div class="day-checkboxes">
+                      <label><input type="checkbox" name="days" value="0"><span>Mon</span></label>
+                      <label><input type="checkbox" name="days" value="1"><span>Tue</span></label>
+                      <label><input type="checkbox" name="days" value="2"><span>Wed</span></label>
+                      <label><input type="checkbox" name="days" value="3"><span>Thu</span></label>
+                      <label><input type="checkbox" name="days" value="4"><span>Fri</span></label>
+                      <label><input type="checkbox" name="days" value="5"><span>Sat</span></label>
+                      <label><input type="checkbox" name="days" value="6"><span>Sun</span></label>
+                    </div>
+                  </fieldset>
+                  <div class="exercise-fields-heading"><span class="field-label">Plan exercises</span><button class="inline-action" type="button" data-add-plan-exercise>Add exercise</button></div>
+                  <div class="plan-exercise-fields" id="plan-exercise-fields">
+                    <div class="plan-exercise-input" data-plan-exercise>
+                      <label class="plan-exercise-name">Exercise<input name="exercise-name" type="text" maxlength="80" placeholder="e.g. Squat" required></label>
+                      <label>Sets<input name="exercise-sets" type="number" min="1" max="20" value="3" required inputmode="numeric"></label>
+                      <label>Reps<input name="exercise-reps" type="number" min="1" max="100" value="10" required inputmode="numeric"></label>
+                      <button class="remove-entry" type="button" data-remove-plan-exercise aria-label="Remove exercise from plan"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M10 11v6m4-6v6M6 7l1 14h10l1-14M9 7V4h6v3"/></svg></button>
+                    </div>
+                  </div>
+                  <button class="button button-primary form-submit" type="submit">Save training plan <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6"/></svg></button>
+                </form>
+              </section>
+              <section class="panel history-panel" aria-labelledby="plan-list-title">
+                <div class="panel-heading"><div><h2 id="plan-list-title">Your plans</h2><p>Start a session whenever you're ready</p></div><span class="history-count" id="plan-count">0 plans</span></div>
+                <div class="plan-list" id="plan-list" aria-live="polite"></div>
+              </section>
+            </div>
+          </section>
+          <section class="view-panel feature-view" id="exercises" data-view="exercises" aria-labelledby="exercises-title" hidden>
+            <div class="feature-heading"><div><p class="eyebrow">MOVE WITH CONFIDENCE</p><h1 id="exercises-title">Exercise library<span class="heading-period">.</span></h1><p class="page-description">Find a movement, learn the setup, and add it to your training.</p></div></div>
+            <section class="exercise-filters panel" aria-label="Search and filter exercises">
+              <div class="exercise-filter-fields">
+                <div class="exercise-search-field"><label class="field-label" for="exercise-search">Search exercises</label><input id="exercise-search" type="search" placeholder="Try squat or dumbbell" autocomplete="off"></div>
+                <div><label class="field-label" for="exercise-muscle-filter">Muscle group</label><select id="exercise-muscle-filter"><option value="">All muscle groups</option></select></div>
+                <div><label class="field-label" for="exercise-equipment-filter">Equipment</label><select id="exercise-equipment-filter"><option value="">All equipment</option></select></div>
+              </div>
+              <div class="exercise-library-meta"><span id="exercise-results-count" role="status" aria-live="polite"></span><button class="inline-action" id="clear-exercise-filters" type="button">Clear filters</button></div>
+            </section>
+            <div class="exercise-library-note" id="exercise-library-note"></div>
+            <div class="exercise-grid" id="exercise-grid" aria-live="polite"></div>
+          </section>
+          <section class="view-panel feature-view" id="progress" data-view="progress" aria-labelledby="progress-title" hidden>
+            <div class="feature-heading"><div><p class="eyebrow">SEE HOW FAR YOU'VE COME</p><h1 id="progress-title">Progress<span class="heading-period">.</span></h1><p class="page-description">Follow body-weight check-ins, strength trends, and personal records.</p></div><a class="button button-secondary" href="#workouts">Log a workout</a></div>
+            <div class="progress-summary-grid">
+              <article class="progress-summary-card panel"><span class="progress-summary-label">Latest body weight</span><strong><span id="weight-latest">--</span> <small>kg</small></strong><span class="progress-summary-foot" id="weight-latest-date">No check-ins yet</span></article>
+              <article class="progress-summary-card panel"><span class="progress-summary-label">Change since first log</span><strong id="weight-change">--</strong><span class="progress-summary-foot" id="weight-change-caption">Log two check-ins to see a change</span></article>
+              <article class="progress-summary-card panel"><span class="progress-summary-label">Completed workouts</span><strong id="progress-workout-count">0</strong><span class="progress-summary-foot">Sessions in your history</span></article>
+              <article class="progress-summary-card panel"><span class="progress-summary-label">Strength PRs</span><strong id="personal-record-count">0</strong><span class="progress-summary-foot">Exercises with a weighted best</span></article>
+            </div>
+            <div class="progress-grid">
+              <section class="panel progress-panel bodyweight-panel" aria-labelledby="bodyweight-title">
+                <div class="panel-heading progress-panel-heading"><div><h2 id="bodyweight-title">Body weight</h2><p>Your check-ins over time</p></div><label class="progress-range-control" for="weight-chart-range"><span>Range</span><select id="weight-chart-range"><option value="30">30 days</option><option value="90">90 days</option><option value="all">All time</option></select></label></div>
+                <div class="progress-chart-wrap"><svg class="progress-line-chart" id="body-weight-chart" viewBox="0 0 640 260" role="img" aria-label="Body weight history in kilograms" hidden></svg><div class="progress-chart-empty" id="body-weight-chart-empty">Log a body-weight check-in to start your trend.</div></div>
+                <p class="progress-chart-caption" id="body-weight-chart-caption">Body weight is stored on this device.</p>
+                <form id="weight-form" class="entry-form progress-weight-form">
+                  <div><label class="field-label" for="weight-date">Date</label><input id="weight-date" name="date" type="date" required></div>
+                  <div><label class="field-label" for="weight-kg">Body weight <span>(kg)</span></label><input id="weight-kg" name="weight" type="number" min="1" max="500" step="0.1" placeholder="e.g. 68.5" required inputmode="decimal"></div>
+                  <button class="button button-primary" type="submit">Save check-in</button>
+                </form>
+                <section class="progress-history" aria-labelledby="weight-history-title"><div class="panel-heading"><div><h3 id="weight-history-title">Weight history</h3><p>One check-in per date</p></div><span class="history-count" id="weight-entry-count">0 entries</span></div><div class="entry-list" id="weight-history-list" aria-live="polite"></div></section>
+              </section>
+              <div class="progress-side-column">
+                <section class="panel progress-panel strength-panel" aria-labelledby="strength-title">
+                  <div class="panel-heading"><div><h2 id="strength-title">Strength progression</h2><p>Best completed set by workout</p></div></div>
+                  <div class="progress-select-field"><label class="field-label" for="strength-exercise-select">Exercise</label><select id="strength-exercise-select"><option value="">No weighted sets yet</option></select></div>
+                  <div class="progress-chart-wrap"><svg class="progress-line-chart" id="strength-progress-chart" viewBox="0 0 640 260" role="img" aria-label="Strength progression in kilograms" hidden></svg><div class="progress-chart-empty" id="strength-progress-empty">Complete a weighted set in a workout to see strength progress.</div></div>
+                  <p class="progress-chart-caption" id="strength-progress-caption">Only completed sets with added weight are included.</p>
+                </section>
+                <section class="panel progress-panel records-panel" aria-labelledby="records-title"><div class="panel-heading"><div><h2 id="records-title">Personal records</h2><p>Heaviest completed set for each exercise</p></div></div><div class="personal-record-list" id="personal-record-list" aria-live="polite"></div></section>
+              </div>
+            </div>
+          </section>
+          <section class="view-panel feature-view nutrition-view" id="nutrition" data-view="nutrition" aria-labelledby="nutrition-title" hidden>
+            <div class="feature-heading">
+              <div><p class="eyebrow">FUEL YOUR DAY</p><h1 id="nutrition-title">Nutrition<span class="heading-period">.</span></h1><p class="page-description">Log what you eat and keep an eye on your daily targets.</p></div>
+              <label class="nutrition-date-control" for="nutrition-date"><span>Tracking date</span><input id="nutrition-date" type="date" required></label>
+            </div>
+            <div class="nutrition-summary-grid">
+              <article class="panel nutrition-calorie-card" aria-labelledby="nutrition-calorie-title">
+                <div class="panel-heading"><div><h2 id="nutrition-calorie-title">Calories</h2><p id="nutrition-calorie-caption">2,000 kcal remaining</p></div><span class="nutrition-card-icon" aria-hidden="true">KCAL</span></div>
+                <div class="nutrition-calorie-value"><strong id="nutrition-calories-consumed">0</strong><span> / <span id="nutrition-calories-goal">2,000</span> kcal</span></div>
+                <div class="nutrition-progress-track" role="progressbar" aria-label="Daily calorie goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 of 2,000 kilocalories"><span id="nutrition-calories-progress"></span></div>
+              </article>
+              <article class="panel nutrition-macros-card" aria-labelledby="nutrition-macros-title">
+                <div class="panel-heading"><div><h2 id="nutrition-macros-title">Macronutrients</h2><p>Daily totals and targets</p></div></div>
+                <div class="nutrition-macro-list">
+                  <div class="nutrition-macro">
+                    <div><strong>Protein</strong><span><b id="nutrition-protein-consumed">0</b> / <b id="nutrition-protein-goal">150</b> g</span></div>
+                    <div class="nutrition-progress-track" role="progressbar" aria-label="Daily protein goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 of 150 grams"><span id="nutrition-protein-progress"></span></div>
+                  </div>
+                  <div class="nutrition-macro">
+                    <div><strong>Carbohydrates</strong><span><b id="nutrition-carbs-consumed">0</b> / <b id="nutrition-carbs-goal">200</b> g</span></div>
+                    <div class="nutrition-progress-track" role="progressbar" aria-label="Daily carbohydrate goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 of 200 grams"><span id="nutrition-carbs-progress"></span></div>
+                  </div>
+                  <div class="nutrition-macro">
+                    <div><strong>Fat</strong><span><b id="nutrition-fat-consumed">0</b> / <b id="nutrition-fat-goal">65</b> g</span></div>
+                    <div class="nutrition-progress-track" role="progressbar" aria-label="Daily fat goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" aria-valuetext="0 of 65 grams"><span id="nutrition-fat-progress"></span></div>
+                  </div>
+                </div>
+              </article>
+            </div>
+            <div class="nutrition-entry-grid">
+              <section class="panel nutrition-form-panel" aria-labelledby="nutrition-form-title">
+                <div class="panel-heading"><div><h2 id="nutrition-form-title">Log food</h2><p>Add a food or meal to the selected date.</p></div></div>
+                <form id="nutrition-form" class="entry-form nutrition-form">
+                  <label class="field-label" for="nutrition-food-name">Food or meal name</label>
+                  <input id="nutrition-food-name" name="name" type="text" maxlength="80" placeholder="e.g. Greek yogurt and berries" required autocomplete="off">
+                  <div class="nutrition-input-grid">
+                    <label class="nutrition-input-field">Calories <span>(kcal)</span><input name="calories" type="number" min="0" max="5000" step="1" required inputmode="numeric"></label>
+                    <label class="nutrition-input-field">Protein <span>(g)</span><input name="protein" type="number" min="0" max="300" step="0.1" required inputmode="decimal"></label>
+                    <label class="nutrition-input-field">Carbohydrates <span>(g)</span><input name="carbs" type="number" min="0" max="300" step="0.1" required inputmode="decimal"></label>
+                    <label class="nutrition-input-field">Fat <span>(g)</span><input name="fat" type="number" min="0" max="300" step="0.1" required inputmode="decimal"></label>
+                  </div>
+                  <button class="button button-primary form-submit" type="submit">Save food entry</button>
+                </form>
+              </section>
+              <section class="panel nutrition-goals-panel" aria-labelledby="nutrition-goals-title">
+                <div class="panel-heading"><div><h2 id="nutrition-goals-title">Daily goals</h2><p>Personalize your calorie and macro targets.</p></div></div>
+                <form id="nutrition-goals-form" class="entry-form nutrition-goals-form">
+                  <div class="nutrition-goal-grid">
+                    <label class="nutrition-input-field">Calories <span>(kcal)</span><input name="calories" type="number" min="500" max="10000" step="1" required inputmode="numeric"></label>
+                    <label class="nutrition-input-field">Protein <span>(g)</span><input name="protein" type="number" min="1" max="1000" step="0.1" required inputmode="decimal"></label>
+                    <label class="nutrition-input-field">Carbohydrates <span>(g)</span><input name="carbs" type="number" min="1" max="1000" step="0.1" required inputmode="decimal"></label>
+                    <label class="nutrition-input-field">Fat <span>(g)</span><input name="fat" type="number" min="1" max="1000" step="0.1" required inputmode="decimal"></label>
+                  </div>
+                  <button class="button button-secondary form-submit" type="submit">Save daily goals</button>
+                </form>
+              </section>
+            </div>
+            <section class="panel history-panel nutrition-history-panel" aria-labelledby="nutrition-log-heading">
+              <div class="panel-heading"><div><h2 id="nutrition-log-heading">Today's food log</h2><p id="nutrition-log-caption">Entries are saved on this device.</p></div><span class="history-count" id="nutrition-entry-count">0 entries</span></div>
+              <div class="entry-list" id="nutrition-list" aria-live="polite"></div>
+            </section>
+          </section>
+          <section class="view-panel feature-view" id="water" data-view="water" aria-labelledby="water-title" hidden>
+            <div class="feature-heading"><div><p class="eyebrow">A MOMENT TO RECHARGE</p><h1 id="water-title">Water<span class="heading-period">.</span></h1><p class="page-description">A simple way to keep an eye on your hydration today.</p></div><button class="button button-secondary" type="button" data-open-goals>Adjust daily goals</button></div>
+            <div class="water-overview panel">
+              <div class="water-overview-copy"><span class="stat-icon icon-blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.5s-6 6.6-6 11a6 6 0 0 0 12 0c0-4.4-6-11-6-11Z"/></svg></span><div><p class="eyebrow">TODAY'S INTAKE</p><strong><span id="water-page-consumed">0</span> <small>ml</small></strong><span class="water-target">Goal: <span id="water-page-goal">2,500</span> ml</span></div></div>
+              <div class="water-progress-wrap"><div class="water-progress-track" role="progressbar" aria-label="Daily water goal" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"><span id="water-page-progress"></span></div><span id="water-page-progress-label">0% complete</span></div>
+              <button class="button button-primary" type="button" data-open-water>Add water <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14m-7-7h14"/></svg></button>
+            </div>
+            <section class="panel history-panel water-history" aria-labelledby="water-history-title">
+              <div class="panel-heading"><div><h2 id="water-history-title">Today's water log</h2><p>This list shows today's entries; past entries remain saved on this device.</p></div><span class="history-count" id="water-count">0 entries</span></div>
+              <div class="entry-list" id="water-list" aria-live="polite"></div>
+            </section>
+          </section>
+          <section class="view-panel feature-view profile-view" id="profile" data-view="profile" aria-labelledby="profile-title" hidden>
+          <div class="feature-heading"><div><p class="eyebrow">YOUR FITTRACK SPACE</p><h1 id="profile-title">Profile<span class="heading-period">.</span></h1><p class="page-description">Manage your account and keep your training data available across devices.</p></div></div>
+          <section class="panel account-panel" aria-labelledby="account-heading">
+            <span class="stat-icon icon-lime account-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3.5"/><path d="M5 20a7 7 0 0 1 14 0"/></svg></span>
+            <div class="account-copy"><p class="eyebrow">ACCOUNT</p><h2 id="account-heading">Guest mode</h2><p id="account-message">Your data is saved in this browser. Create an account to enable cloud sync.</p><p id="account-status" role="status" hidden></p></div>
+            <div class="account-actions">
+              <a class="button button-secondary" id="account-login-link" href="login.html">Sign in</a>
+              <a class="button button-primary" id="account-register-link" href="register.html">Create account</a>
+              <button class="button button-secondary" id="account-sync-button" type="button" hidden>Merge and sync device data</button>
+              <button class="button button-secondary" id="account-signout-button" type="button" hidden>Sign out</button>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+    <div class="app-status" id="app-status" role="alert" aria-live="assertive" hidden></div>
+    <div class="app-toast" id="success-status" role="status" aria-live="polite" hidden></div>
+    <dialog class="modal" id="water-dialog" aria-labelledby="water-dialog-title">
+      <form class="modal-form" id="water-form">
+        <div class="modal-heading"><div><p class="eyebrow">HYDRATION</p><h2 id="water-dialog-title">Log water</h2></div><button class="icon-button modal-close" type="button" data-close-dialog aria-label="Close dialog">×</button></div>
+        <p class="modal-description">Record how much water you just drank.</p>
+        <label class="field-label" for="water-amount">Amount <span>(millilitres)</span></label>
+        <input id="water-amount" name="amount" type="number" min="50" max="5000" step="50" value="250" required inputmode="numeric">
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Save water</button></div>
+      </form>
+    </dialog>
+    <dialog class="modal" id="goals-dialog" aria-labelledby="goals-dialog-title">
+      <form class="modal-form" id="goals-form">
+        <div class="modal-heading"><div><p class="eyebrow">YOUR DAILY TARGETS</p><h2 id="goals-dialog-title">Set your goals</h2></div><button class="icon-button modal-close" type="button" data-close-dialog aria-label="Close dialog">×</button></div>
+        <p class="modal-description">Choose personal targets for your daily activity and water.</p>
+        <label class="field-label" for="activity-goal-input">Active minutes <span>(per day)</span></label>
+        <input id="activity-goal-input" name="activity" type="number" min="1" max="600" step="1" required inputmode="numeric">
+        <label class="field-label" for="water-goal-input">Water <span>(millilitres per day)</span></label>
+        <input id="water-goal-input" name="water" type="number" min="250" max="10000" step="50" required inputmode="numeric">
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-dialog>Cancel</button><button class="button button-primary" type="submit">Save goals</button></div>
+      </form>
+    </dialog>
+    <dialog class="modal exercise-detail-dialog" id="exercise-details-dialog" aria-labelledby="exercise-detail-title">
+      <div class="exercise-detail-content">
+        <div class="modal-heading"><div><p class="eyebrow">EXERCISE GUIDE</p><h2 id="exercise-detail-title"></h2></div><button class="icon-button modal-close" type="button" data-close-dialog aria-label="Close exercise details">×</button></div>
+        <div class="exercise-detail-visual" id="exercise-detail-visual"></div>
+        <p class="modal-description" id="exercise-detail-summary"></p>
+        <div class="exercise-detail-facts" id="exercise-detail-facts"></div>
+        <section class="exercise-detail-section" aria-labelledby="exercise-instructions-title"><h3 id="exercise-instructions-title">How to do it</h3><ol id="exercise-instructions"></ol></section>
+        <section class="exercise-detail-section exercise-coaching-cues" aria-labelledby="exercise-cues-title"><h3 id="exercise-cues-title">Form cues</h3><ul id="exercise-cues"></ul></section>
+        <p class="exercise-safety-note">Start with a load and range of motion you can control. Stop if the movement causes pain.</p>
+        <div class="modal-actions"><button class="button button-secondary" type="button" data-close-dialog>Close</button><button class="button button-primary" type="button" data-add-library-exercise>Use in workout</button></div>
+      </div>
+    </dialog>
+  </body>
+</html>

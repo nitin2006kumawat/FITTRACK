@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#10120f">
+    <meta name="description" content="Sign in to your FITTRACK account.">
+    <title>Sign in · FITTRACK</title>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/components.css">
+    <script type="module" src="js/auth-page.js"></script>
+  </head>
+  <body class="auth-page">
+    <main class="auth-shell">
+      <a class="brand auth-brand" href="index.html#dashboard" aria-label="FITTRACK dashboard">
+        <span class="brand-mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M5 18h5l3-9 5 15 3-8h6" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+        <span class="brand-name">FIT<span>TRACK</span></span>
+      </a>
+      <section class="panel auth-card" aria-labelledby="auth-title">
+        <p class="eyebrow">WELCOME BACK</p>
+        <h1 id="auth-title">Sign in<span class="heading-period">.</span></h1>
+        <p class="auth-description">Sign in to access your FITTRACK account and synced data.</p>
+        <p class="auth-config-warning" id="auth-config-warning" role="status" hidden></p>
+        <form id="auth-form" data-auth-mode="login" class="auth-form">
+          <label for="auth-email">Email address</label>
+          <input id="auth-email" name="email" type="email" maxlength="254" autocomplete="email" required>
+          <label for="auth-password">Password</label>
+          <input id="auth-password" name="password" type="password" minlength="8" maxlength="128" autocomplete="current-password" required>
+          <button class="button button-primary auth-submit" type="submit">Sign in</button>
+        </form>
+        <p class="auth-status" id="auth-status" role="status" aria-live="polite" hidden></p>
+        <p class="auth-switch">New to FITTRACK? <a href="register.html">Create an account</a></p>
+        <a class="auth-guest-link" href="index.html#dashboard">Continue in guest mode</a>
+      </section>
+    </main>
+  </body>
+</html>
