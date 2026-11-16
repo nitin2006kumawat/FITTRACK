@@ -79,3 +79,48 @@ export async function subscribeToAuthChanges(callback) {
   });
   return () => data.subscription.unsubscribe();
 }
+export async function deleteCurrentAccount(password) {
+  if (typeof password !== "string" || !password) {
+    throw new Error("Enter your password to confirm account deletion.");
+  }
+
+  const client = await getClient();
+
+  const { data, error: sessionError } = await client.auth.getSession();
+
+  if (sessionError) throw sessionError;
+
+  if (!data.session) {
+    throw new Error("Your session has expired. Please sign in again.");
+  }
+
+  const { data: result, error } = await client.functions.invoke(
+    "delete-account",
+    {
+      body: { password },
+    }
+  );
+
+ if (error) {
+  let message = result?.message;
+
+  if (!message && error.context?.json) {
+    try {
+      const response = await error.context.json();
+      message = response?.message;
+    } catch {
+      // Keep the default message if the response cannot be read.
+    }
+  }
+
+  throw new Error(
+    message || "Account deletion failed. Please try again."
+  );
+}
+
+  if (result?.message !== "Account deleted successfully.") {
+    throw new Error("Account deletion could not be confirmed.");
+  }
+
+  return result;
+}

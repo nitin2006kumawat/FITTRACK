@@ -7,6 +7,7 @@ import {
 } from "./storage.js";
 import { EXERCISES, EXERCISE_EQUIPMENT, EXERCISE_MUSCLE_GROUPS } from "./exercises.js";
 import {
+  deleteCurrentAccount,
   getCurrentSession,
   isSupabaseConfigured,
   loadCloudData,
@@ -55,6 +56,11 @@ const accountLoginLink = document.querySelector("#account-login-link");
 const accountRegisterLink = document.querySelector("#account-register-link");
 const accountSyncButton = document.querySelector("#account-sync-button");
 const accountSignOutButton = document.querySelector("#account-signout-button");
+const accountDeleteButton = document.querySelector("#account-delete-button");
+const deleteAccountDialog = document.querySelector("#delete-account-dialog");
+const deleteAccountForm = document.querySelector("#delete-account-form");
+const deleteAccountPassword = document.querySelector("#delete-account-password");
+const cancelAccountDeletion = document.querySelector("#cancel-account-deletion");
 const profileAvatar = document.querySelector("#profile-avatar");
 const profileName = document.querySelector("#profile-name");
 const profileMode = document.querySelector("#profile-mode");
@@ -92,6 +98,7 @@ let selectedExerciseId = null;
 let pendingExercise = null;
 let currentUser = null;
 let cloudSyncEnabled = false;
+let accountDeletionInProgress = false;
 let accountNotice = "";
 let cloudSaveQueue = Promise.resolve();
 
@@ -233,7 +240,10 @@ function renderAccount() {
   accountSyncButton.hidden = !currentUser || cloudSyncEnabled;
   accountSyncButton.disabled = Boolean(storageError);
   accountSignOutButton.hidden = !currentUser;
-
+accountDeleteButton.hidden = !currentUser;
+accountSyncButton.disabled = accountDeletionInProgress || Boolean(storageError);
+accountSignOutButton.disabled = accountDeletionInProgress;
+accountDeleteButton.disabled = accountDeletionInProgress;
   const notice = accountNotice || (!isConfigured
     ? "Account access needs a Supabase project URL and publishable key in js/supabase-config.js. Never use a service-role key here."
     : "");
@@ -268,10 +278,27 @@ function saveCloudOwner(userId) {
     throw new Error("Cloud data synced, but FITTRACK could not remember this account on the device. Check browser storage permissions.");
   }
 }
+function clearDeletedAccountLocalData(deletedUserId) {
+  const ownerId = window.localStorage.getItem("fittrack.cloud-owner.v1");
 
+  if (ownerId !== deletedUserId) {
+    return false;
+  }
+
+  window.localStorage.removeItem("fittrack.guest.v1");
+  window.localStorage.removeItem("fittrack.cloud-owner.v1");
+
+  state = createInitialData();
+  return true;
+}
 function queueCloudSave(data, userId) {
   cloudSaveQueue = cloudSaveQueue.then(async () => {
-    if (!currentUser || currentUser.id !== userId || !cloudSyncEnabled) return;
+    if (
+  accountDeletionInProgress ||
+  !currentUser ||
+  currentUser.id !== userId ||
+  !cloudSyncEnabled
+) return;
     await saveCloudData(data);
     saveCloudOwner(userId);
     accountNotice = "Your latest changes are synced to your account.";
@@ -283,8 +310,11 @@ function queueCloudSave(data, userId) {
     showError(accountNotice);
   });
 }
-
+async function waitForPendingCloudSaves() {
+  await cloudSaveQueue;
+}
 async function applyAccountSession(user) {
+  if (accountDeletionInProgress) return;
   if (!user) {
     currentUser = null;
     cloudSyncEnabled = false;
@@ -359,7 +389,7 @@ async function applyAccountSession(user) {
 }
 
 async function syncAccountData() {
-  if (!currentUser || storageError) return;
+  if (accountDeletionInProgress || !currentUser || storageError) return;
   accountSyncButton.disabled = true;
   accountNotice = "Merging device and account data…";
   renderAccount();
@@ -2140,6 +2170,92 @@ accountSignOutButton.addEventListener("click", async () => {
   } finally {
     accountSignOutButton.disabled = false;
   }
+});
+accountDeleteButton.addEventListener("click", () => {
+  if (!currentUser) return;
+
+  deleteAccountForm.reset();
+  deleteAccountDialog.showModal();
+  deleteAccountPassword.focus();
+});
+
+cancelAccountDeletion.addEventListener("click", () => {
+  if (accountDeletionInProgress) return;
+
+  deleteAccountForm.reset();
+  deleteAccountDialog.close();
+});
+deleteAccountDialog.addEventListener("cancel", (event) => {
+  if (accountDeletionInProgress) {
+    event.preventDefault();
+  }
+});
+deleteAccountForm.addEventListener("submit", async (event) => {
+  event.preventDefault();
+
+  if (accountDeletionInProgress || !currentUser) return;
+
+  const password = deleteAccountPassword.value;
+
+  if (!password) {
+    deleteAccountPassword.setCustomValidity("Password is required.");
+    deleteAccountPassword.reportValidity();
+    deleteAccountPassword.setCustomValidity("");
+    return;
+  }
+const wasCloudSyncEnabled = cloudSyncEnabled;
+  accountDeletionInProgress = true;
+cloudSyncEnabled = false;
+
+cancelAccountDeletion.disabled = true;
+deleteAccountPassword.disabled = true;
+
+accountNotice = "Preparing secure account deletion...";
+renderAccount();
+
+try {
+  await waitForPendingCloudSaves();
+
+const deletedUserId = currentUser.id;
+
+await deleteCurrentAccount(password);
+// Clear the deleted account's saved login session.
+try {
+  await signOut();
+} catch (signOutError) {
+  console.warn("Could not clear the local session:", signOutError);
+}
+// Server confirmed that the account was deleted.
+cloudSyncEnabled = false;
+currentUser = null;
+
+try {
+  clearDeletedAccountLocalData(deletedUserId);
+} catch (cleanupError) {
+  console.error("Local account data cleanup failed:", cleanupError);
+  accountNotice =
+    "Your account was deleted, but local data could not be cleared. Please clear this site's browser storage.";
+}
+
+if (!accountNotice.includes("local data could not be cleared")) {
+  accountNotice = "Your FITTRACK account was deleted successfully.";
+}
+
+deleteAccountForm.reset();
+deleteAccountDialog.close();
+render();
+} catch (error) {
+  if (currentUser) {
+    cloudSyncEnabled = wasCloudSyncEnabled;
+  }
+
+  accountNotice = `Account deletion failed. ${error.message}`;
+  showError(accountNotice);
+} finally {  accountDeletionInProgress = false;
+  cancelAccountDeletion.disabled = false;
+  deleteAccountPassword.disabled = false;
+  renderAccount();
+}
 });
 restDurationSelect.addEventListener("change", () => {
   stopRestTimer();
